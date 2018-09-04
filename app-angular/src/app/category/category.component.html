@@ -1,0 +1,57 @@
+<div class="row">
+<div class="col-5">
+  <div class="card">
+    <form (ngSubmit)="onSubmited()">
+    <div class="card-header">Form Category</div>
+    <div class="card-body" align="center">
+        <div class="form-group">
+          <input type="hidden" [(ngModel)]="category.id" name="id">
+          <input type="text" class="form-control" [(ngModel)]="category.name" name="name" placeholder="Name of category">
+        </div>
+        <div class="form-group">
+          <select class="form-control" [(ngModel)]="category.status" name="status">
+            <option *ngFor="let status of statuses" [value]="status.id">
+              {{status.value}}
+            </option>
+          </select>
+        </div>
+    </div>
+    <div class="card-footer" align="center">
+      <button type="submit" class="btn btn-success">Save</button> &nbsp;
+      <button type="button" class="btn btn-default">Cancel</button>&nbsp;
+    </div>
+  </form>
+  </div>
+</div>
+<div class="col-lg-6">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categorys | async; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{category.name}}</td>
+          <td>{{category.status}}</td>
+          <td>
+            <button type="button" (click)="getUpdateById(category.id)" class="btn btn-success">Update</button>&nbsp;
+            <button type="button" class="btn btn-default">Delete</button>
+          </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>No</th>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+</div>
