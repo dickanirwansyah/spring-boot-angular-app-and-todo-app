@@ -1,0 +1,18 @@
+#konfigurasi port
+server:
+  port: 8888
+  servlet:
+    context-path: /start-app
+
+#konfigurasi database
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/DBDEVELOPMENT
+    username: root
+    password: root
+    
+#konfigurasi jpa
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
