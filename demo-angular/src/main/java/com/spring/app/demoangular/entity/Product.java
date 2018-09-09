@@ -16,9 +16,6 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "product")
 public class Product {
@@ -48,4 +45,17 @@ public class Product {
 	@Min(1)
 	@Column(name = "stock", nullable = false)
 	private Integer stock;
+
+	public Product(){
+		super();
+	}
+
+	public Product(Long id, String name, Category category, Long price, Integer stock){
+		super();
+		this.id = id;
+		this.name = name;
+		this.category = category;
+		this.price = price;
+		this.stock = stock;
+	}
 }

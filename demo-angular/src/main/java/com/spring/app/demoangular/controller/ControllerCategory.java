@@ -1,6 +1,5 @@
 package com.spring.app.demoangular.controller;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.spring.app.demoangular.entity.Category;
 import com.spring.app.demoangular.repository.CategoryRepository;
-import com.spring.app.demoangular.response.CategoryResponse;
 
 @RestController
 @RequestMapping(value = "/api/category")
@@ -61,19 +59,13 @@ public class ControllerCategory {
 					return ResponseEntity.ok().build();
 				}).orElseThrow(() -> new NotFoundException("categoryId not found : "+categoryId));
 	}
-	
+
 	@PostMapping
-	public CategoryResponse createCategory(@RequestBody Category category) {
-		if(category.getId()!=null){
-			categoryRepository.save(category);
-		}else{
-			 categoryRepository.save(category);
-		}
-		CategoryResponse response = CategoryResponse
-				.builder()
-				.categoryId(category.getId())
-				.categoryName(category.getName())
-				.build();
-		return response;
+	public ResponseEntity<Category> createProduct(@RequestBody Category category){
+		Category newCategory = categoryRepository
+				.save(category);
+		return ResponseEntity
+				.ok()
+				.body(newCategory);
 	}
 }
