@@ -43,6 +43,17 @@ public class ControllerProduct {
                 .orElseThrow(()-> new NotFoundException("productId not found."));
     }
 
+    @DeleteMapping(value = "/{productId}")
+    public ResponseEntity<?> delete(@PathVariable("productId") Long productId){
+        return productRepository.findById(productId)
+                .map(dataProduct -> {
+                    productRepository.delete(dataProduct);
+                    return ResponseEntity
+                            .ok()
+                            .build();
+                }).orElseThrow(() -> new NotFoundException("product id not found"));
+    }
+
     @PutMapping(value = "/{categoryId}/{productId}")
     public Product update(@PathVariable("categoryId") Long categoryId,
                           @PathVariable("productId") Long productId,
